@@ -1,0 +1,19 @@
+.starting-number {
+  background-color: var(--mat-sys-on-secondary);
+}
+
+.inserted-number {
+  background-color: var(--mat-sys-surface-tint);
+  color: #101414;
+}
+
+.empty-cell {
+  background-color: #101414;
+}
+
+input {
+  color: var(--mat-sys-surface-tint);
+  box-shadow: none;
+  border: none
+}
+

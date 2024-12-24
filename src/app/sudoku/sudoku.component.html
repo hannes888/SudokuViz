@@ -1,0 +1,9 @@
+<div>
+  <table>
+    <tr *ngFor="let row of board; let rowIndex = index">
+      <td *ngFor="let cell of row; let colIndex = index">
+        <input type="number" min="0" max="9" [value]="cell" [ngClass]="getCellClass(rowIndex, colIndex)">
+      </td>
+    </tr>
+  </table>
+</div>
