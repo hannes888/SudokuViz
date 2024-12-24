@@ -1,15 +1,14 @@
 <div class="main">
-  <div>
+  <div class="default-container">
     <app-sudoku></app-sudoku>
   </div>
-  <div>
+  <div class="controls">
     <button mat-raised-button (click)="startSolving()">Solve</button>
-  </div>
-  <div>
     <button mat-raised-button (click)="reset()">Reset</button>
+    <mat-slider min="0" max="1000" step="10" discrete>
+      <input matSliderThumb  [(ngModel)]="delay">
+    </mat-slider>
+    <p>ms</p>
   </div>
 
-  <mat-slider min="0" max="1000" step="10" discrete [(ngModel)]="delay">
-    <input matSliderThumb value="100">
-  </mat-slider>
 </div>

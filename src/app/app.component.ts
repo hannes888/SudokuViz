@@ -19,6 +19,7 @@ export class AppComponent {
   constructor(private sudokuService: SudokuService) {}
 
   public async startSolving(): Promise<void> {
+    console.log(this.delay);
     await this.sudokuService.solveSudoku(() => {
       // Trigger change detection to update the board in the template
     }, this.delay);

@@ -1,7 +1,13 @@
 <div>
-  <table>
+  <table class="sudoku-grid">
     <tr *ngFor="let row of board; let rowIndex = index">
-      <td *ngFor="let cell of row; let colIndex = index">
+      <td *ngFor="let cell of row; let colIndex = index"
+          [ngClass]="{
+            'thick-border-top': rowIndex % 3 === 0,
+            'thick-border-left': colIndex % 3 === 0,
+            'thick-border-right': colIndex % 3 === 2,
+            'thick-border-bottom': rowIndex % 3 === 2
+          }">
         <input type="number" min="0" max="9" [value]="cell" [ngClass]="getCellClass(rowIndex, colIndex)">
       </td>
     </tr>
