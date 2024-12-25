@@ -19,6 +19,29 @@
   gap: 10px;
 }
 
-p {
+h1, p {
   color: var(--mat-sys-surface-tint);
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+}
+
+.github-icon-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.github-icon {
+  fill: #1b3534;
+  transition: fill 0.3s ease;
+  width: 40px;
+  height: 40px;
+}
+
+.github-icon:hover {
+  fill: var(--mat-sys-surface-tint);
+  cursor: pointer;
 }
