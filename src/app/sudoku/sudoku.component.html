@@ -8,7 +8,9 @@
             'thick-border-right': colIndex % 3 === 2,
             'thick-border-bottom': rowIndex % 3 === 2
           }">
-        <input type="number" min="0" max="9" [value]="cell" [ngClass]="getCellClass(rowIndex, colIndex)">
+        <div [ngClass]="['cell-base', getCellClass(rowIndex, colIndex)]">
+          {{ board[rowIndex][colIndex] }}
+        </div>
       </td>
     </tr>
   </table>

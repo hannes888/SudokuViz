@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SudokuService } from '../sudoku.service';
@@ -8,7 +8,7 @@ import { SudokuService } from '../sudoku.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './sudoku.component.html',
-  styleUrl: './sudoku.component.css'
+  styleUrls: ['./sudoku.component.css']
 })
 export class SudokuComponent {
   board: number[][];
@@ -17,8 +17,8 @@ export class SudokuComponent {
     this.board = this.sudokuService.board;
   }
 
+  // Add styles based on whether the cell is filled in or not
   getCellClass(row: number, col: number): string {
-
     if (this.sudokuService.initialBoard[row][col] !== 0) {
       return 'starting-number';
     }

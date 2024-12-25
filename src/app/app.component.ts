@@ -19,13 +19,20 @@ export class AppComponent {
   constructor(private sudokuService: SudokuService) {}
 
   public async startSolving(): Promise<void> {
-    console.log(this.delay);
-    await this.sudokuService.solveSudoku(() => {
+    const result = await this.sudokuService.solveSudoku(() => {
       // Trigger change detection to update the board in the template
     }, this.delay);
+
+    if (!result) {
+      alert("Sudoku is unsolvable")
+    }
   }
 
   public reset() {
     window.location.reload();
+  }
+
+  public generateSudoku(): void {
+    return;
   }
 }

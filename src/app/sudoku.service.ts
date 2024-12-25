@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,7 @@ export class SudokuService {
   private _board: number[][];
   private _initialBoard: number[][];
   public currentCell: { row: number, col: number } | null = null;
+  private _initialBoardIsValid: boolean = true;
 
   constructor() {
     this._board = [
@@ -32,6 +33,9 @@ export class SudokuService {
   }
 
   public async solveSudoku(callback: () => void, delay: number, board: number[][] = this._board, n: number = 9): Promise<boolean> {
+    if (!this._initialBoardIsValid) {  // User has modified the board so it is no longer valid
+      return false;
+    }
     let row = -1;
     let col = -1;
     let isEmpty = true;
@@ -56,14 +60,14 @@ export class SudokuService {
     for (let num = 1; num <= n; num++) {
       if (this.moveIsValid(board, row, col, num)) {
         board[row][col] = num;
-        this.currentCell = { row, col };
+        this.currentCell = {row, col};
         callback();
         await new Promise(resolve => setTimeout(resolve, delay));
         if (await this.solveSudoku(callback, delay, board, n)) {
           return true;
         } else {
           board[row][col] = 0;
-          this.currentCell = { row, col };
+          this.currentCell = {row, col};
           callback();
           await new Promise(resolve => setTimeout(resolve, delay));
         }

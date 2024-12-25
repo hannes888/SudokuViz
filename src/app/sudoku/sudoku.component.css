@@ -1,17 +1,17 @@
 .starting-number {
-  background-color: var(--mat-sys-on-secondary);
+  background-color: var(--mat-sys-on-secondary) !important;
 }
 
 .inserted-number {
   background-color: var(--mat-sys-surface-tint);
-  color: #101414;
+  color: #101414 !important;
 }
 
 .empty-cell {
-  background-color: #101414;
+  background-color: #101414 !important;
 }
 
-input {
+.cell-base {
   color: var(--mat-sys-surface-tint);
   box-shadow: none;
   border: none;
@@ -19,6 +19,7 @@ input {
   height: 50px;
   text-align: center;
   font-size: 30px;
+  line-height: 50px;
 }
 
 .sudoku-grid {
@@ -44,14 +45,3 @@ input {
 .thick-border-bottom {
   border-bottom: 3px solid var(--mat-sys-surface-tint) !important;
 }
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
