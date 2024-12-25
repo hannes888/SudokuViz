@@ -1,4 +1,7 @@
 import {Injectable} from '@angular/core';
+import {map} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,7 @@ export class SudokuService {
   public currentCell: { row: number, col: number } | null = null;
   private _initialBoardIsValid: boolean = true;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this._board = [
       [0, 4, 2, 5, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 4, 0, 5],
@@ -30,6 +33,27 @@ export class SudokuService {
 
   get board(): number[][] {
     return this._board;
+  }
+
+  async newBoard(): Promise<void> {
+    this._board = await this.fetchNewBoard();
+    console.log(this._board);
+    this._initialBoard = JSON.parse(JSON.stringify(this._board));
+  }
+
+  fetchNewBoard(): Promise<number[][]> {
+    const url = 'https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}';
+    return firstValueFrom(
+      this.http.get<any>(url).pipe(
+        map((response) => {
+          if (response && response.newboard && response.newboard.grids && response.newboard.grids[0]) {
+            return response.newboard.grids[0].value;
+          } else {
+            throw new Error('Unexpected API response structure');
+          }
+        })
+      )
+    );
   }
 
   public async solveSudoku(callback: () => void, delay: number, board: number[][] = this._board, n: number = 9): Promise<boolean> {

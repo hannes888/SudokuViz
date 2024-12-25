@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { SudokuService } from './sudoku.service';
 import { MatSlider, MatSliderThumb } from '@angular/material/slider';
@@ -16,12 +16,12 @@ export class AppComponent {
   title = 'SudokuViz';
   delay: number = 100;
 
+  @ViewChild(SudokuComponent) sudokuComponent!: SudokuComponent;
+
   constructor(private sudokuService: SudokuService) {}
 
   public async startSolving(): Promise<void> {
-    const result = await this.sudokuService.solveSudoku(() => {
-      // Trigger change detection to update the board in the template
-    }, this.delay);
+    const result = await this.sudokuService.solveSudoku(() => {}, this.delay);
 
     if (!result) {
       alert("Sudoku is unsolvable")
@@ -32,7 +32,8 @@ export class AppComponent {
     window.location.reload();
   }
 
-  public generateSudoku(): void {
-    return;
+  public async generateSudoku(): Promise<void> {
+    await this.sudokuService.newBoard();
+    this.sudokuComponent.updateBoard();
   }
 }

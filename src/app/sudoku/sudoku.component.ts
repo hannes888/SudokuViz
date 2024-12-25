@@ -27,4 +27,8 @@ export class SudokuComponent {
     }
     return 'empty-cell';
   }
+
+  updateBoard(): void {
+    this.board = this.sudokuService.board;
+  }
 }
