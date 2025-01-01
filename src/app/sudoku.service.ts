@@ -10,7 +10,6 @@ export class SudokuService {
   private _board: number[][];
   private _initialBoard: number[][];
   public currentCell: { row: number, col: number } | null = null;
-  private _initialBoardIsValid: boolean = true;
 
   constructor(private http: HttpClient) {
     this._board = [
@@ -57,9 +56,7 @@ export class SudokuService {
   }
 
   public async solveSudoku(callback: () => void, delay: number, board: number[][] = this._board, n: number = 9): Promise<boolean> {
-    if (!this._initialBoardIsValid) {  // User has modified the board so it is no longer valid
-      return false;
-    }
+
     let row = -1;
     let col = -1;
     let isEmpty = true;
